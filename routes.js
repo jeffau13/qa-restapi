@@ -63,12 +63,23 @@ router.delete("/:qID/answers/:aID",(req,res,next)=>{
 //Post /questions/:id/answers/:aID/vote-up
 //POST /questions/:id/answers/:aID/vote-down
 // Vote on a specific answer
-router.post("/:qID/answers/:aID/vote-:dir",(req,res,next)=>{
-    res.json({
-        response: "You sent a Post request to vote on /answers",
-        questionId: req.params.qID,
-        answerId: req.params.aID,
-        vote:req.params.dir
+router.post("/:qID/answers/:aID/vote-:dir",
+    //validate vote param
+    (req, res, next) => {
+        if(req.params.dir.search(/^(up|down)$/)===-1){
+            var err = new Error('Not Found');
+            err.status = 404;
+            next(err);
+        }else{
+        next();
+        }
+    },
+    (req, res, next) => {
+        res.json({
+            response: "You sent a Post request to vote on /answers",
+            questionId: req.params.qID,
+            answerId: req.params.aID,
+            vote: req.params.dir
+        });
     });
-});
 module.exports = router;
