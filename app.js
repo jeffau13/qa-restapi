@@ -13,7 +13,7 @@ app.use(jsonParser());
 
 app.use("/questions", routes);
 
-//catch 404 error and foward to error handler
+//catch 404 error and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not found');
   err.status = 404;
