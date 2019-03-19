@@ -20,7 +20,7 @@ const AnswerSchema = new Schema({
     updatedAt: {type: Date, default: Date.now},
     votes: {type: Number, default: 0}
 });
-
+//Instance methods - method that is called directly on a document:
 AnswerSchema.method("update",function(updates, callback){
     Object.assign(this, updates, {updatedAt: new Date()})
     this.parent().save(callback);
