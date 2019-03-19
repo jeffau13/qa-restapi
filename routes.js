@@ -20,8 +20,8 @@ router.param("qID", (req, res, next, id) => {
 
 //fetching and storing aId parameter from db and storing into req.answer
 router.param("aID",(req,res,next,id)=>{
-   req.answer = req.question.answer.id(id);
-   if (!answer) {
+   req.answer = req.question.answers.id(id);
+   if (!req.answer) {
     err = new Error('Not found');
     err.status = 404;
     return next(err);
@@ -61,7 +61,7 @@ router.get('/:qID', (req,res,next)=>{
 // POST /questions/:id/answers
 // Route for creating an answer
 router.post("/:qID/answers", (req, res,next)=>{
-	req.question.answers.push(req.body)
+	req.question.answers.push(req.body);
 	req.question.save((err,question)=>{
         if(err) return next(err);
         res.status(201);
