@@ -21,7 +21,7 @@ router.param("qId", (req, res, next, id) => {
 //fetching and storing aId parameter from db and storing into req.answer
 router.param("aId",(req,res,next,id)=>{
    req.answer = req.question.answer.id(id);
-   if (!doc) {
+   if (!answer) {
     err = new Error('Not found');
     err.status = 404;
     return next(err);
